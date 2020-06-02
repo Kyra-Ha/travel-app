@@ -1,12 +1,16 @@
-API_key = e190534a50d04c778eed7158e9bdadf5 //weatherbit.io
-baseURL = 'http://api.weatherbit.io/v2.0/current?'
 
-const getWeather = async (baseURL, place , API_key) => {
+//get date
+let d = new Date();
+let months = ["January", "February", "March", "April", "May", "June", "July",
+"August", "September", "October", "November", "December"];
+let newDate = months[d.getMonth()]+','+ d.getDate()+','+ d.getFullYear();
+
+const getWeather = async (baseURL_weath, place, API_key, newDate) => {
     const input = document.getElementById('input1').value;
-    const res = await fetch(baseURL+'city='+input+'&key='+API_key)
+    const res = await fetch(baseURL_weath+'city='+input+'&key=', API_key)
 	.then(res=>res.json())
     .then(function(response) {
-        postData('add', {temp, description, date});
+        postData('add', {temp, description, place, newDate});
 		console.log(temp, description);
     })
     .then(function() {
@@ -24,7 +28,8 @@ const postData = async (url = '', data = {}) => {
 		body: JSON.stringify({
 			temp: data.temp,
             description: data.description,
-            date:data.date
+            date:data.date,
+            place:data.place
 		}),
 
 	});
@@ -43,6 +48,7 @@ const updateWeather = async() => {
         document.getElementById('temp').innerHTML = response.app_temp;
         document.getElementById('description').innerHTML = response.weather.description;
         document.getElementById('date').innerHTML = response.date;
+        document.getElementById('place').innerHTML = response.city_name;
         console.log(response)
 
 	}catch(error){

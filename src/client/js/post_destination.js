@@ -1,11 +1,9 @@
-userName = 'kyraha' //geonames
-baseURL = 'api.geonames.org/postalCodeSearchJSON?placename='
+/* Function to GET geo_names Web API Data*/
 
-/* Function to GET Web API Data*/
+const getDest = async (baseURL_geo, place, userName) => {
+    const input = document.getElementById('zip').value;
 
-const getDest = async (baseURL, place, userName) => {
-    const input = document.getElementById('input1').value;
-    const res = await fetch(baseURL+input+'&maxRows=10&username='+userName)
+    const res = await fetch(baseURL_geo+input+'&maxRows=10&username='+userName)
 	.then(res=>res.json())
     .then(function(response) {
         postData('add', place);
