@@ -6,11 +6,12 @@ const getDest = async (baseURL_geo, place, userName) => {
     const res = await fetch(baseURL_geo+input+'&maxRows=10&username='+userName)
 	.then(res=>res.json())
     .then(function(response) {
-        postData('add', place);
-			console.log(place);
+        const dest = document.getElementById('place').value
+        postData('add', dest);
+			console.log(dest);
     })
-    .then(function() {
-        updateDestination();
+    .then(async function() {
+        await updateDestination();
     })
 
 }
@@ -49,7 +50,7 @@ const updateDestination = async() => {
 	const request = await fetch('all')
 	try{
 		const response = await request.json()
-        const place = response.postalCodes[0].placeName;
+        const place = response.code;
         console.log(place)
 
 	}catch(error){

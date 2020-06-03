@@ -18,9 +18,9 @@ let newDate = months[d.getMonth()]+','+ d.getDate()+','+ d.getFullYear();
 async function performAction(e){
 	e.preventDefault();
 	console.log("clicked");
-	const content = document.getElementById('input1').value;
-	getDest(baseURL_geo, place, userName); 
-	getWeather(baseURL_weath, place, API_key, content);
+	const content = document.getElementById('zip').value;
+	await getDest(baseURL_geo, place, userName); 
+	await getWeather(baseURL_weath, place, API_key, content);
 	
 };
 

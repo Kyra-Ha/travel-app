@@ -26,14 +26,14 @@ function listening(){
 	console.log(`running on localhost: ${port}`);};
 
 // Initialize all route with a callback function
-app.get('/all', function (req, res) {
+app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
 })
 
 
 
 // Callback function to complete GET '/all'
-
+app.get('/all', sendData)
 function sendData(req, res){
 	res.send(projectData);
 };
@@ -51,10 +51,10 @@ function addData(req, res){
 	};
 	const weatherData = {
 		temp: req.body.temp,
-		description: req.body.description
+		description: req.body.weather
 	};
 
-	projectData = {...placeEntry}
+	projectData = {weatherData}
 	res.send(projectData);
 	console.log(projectData);
 };

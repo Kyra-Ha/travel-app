@@ -6,15 +6,15 @@ let months = ["January", "February", "March", "April", "May", "June", "July",
 let newDate = months[d.getMonth()]+','+ d.getDate()+','+ d.getFullYear();
 
 const getWeather = async (baseURL_weath, place, API_key, newDate) => {
-    const input = document.getElementById('input1').value;
-    const res = await fetch(baseURL_weath+'city='+input+'&key=', API_key)
+    const input = document.getElementById('zip').value;
+    const res = await fetch(baseURL_weath+'city='+input+'&key='+API_key)
 	.then(res=>res.json())
     .then(function(response) {
-        postData('add', {temp, description, place, newDate});
+        postData('add', {temp, description, input, newDate});
 		console.log(temp, description);
     })
-    .then(function() {
-        updateWeather();
+    .then(async function() {
+        await updateWeather();
     })
 
 }
@@ -46,7 +46,7 @@ const updateWeather = async() => {
 	try{
         const response = await request.json()
         document.getElementById('temp').innerHTML = response.app_temp;
-        document.getElementById('description').innerHTML = response.weather.description;
+        document.getElementById('description').innerHTML = response.description;
         document.getElementById('date').innerHTML = response.date;
         document.getElementById('place').innerHTML = response.city_name;
         console.log(response)
