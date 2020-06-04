@@ -3,22 +3,23 @@
 let d = new Date();
 let months = ["January", "February", "March", "April", "May", "June", "July",
 "August", "September", "October", "November", "December"];
-let newDate = months[d.getMonth()]+','+ d.getDate()+','+ d.getFullYear();
+let newDate = months[d.getMonth()]+'\n'+ d.getDate()+','+ d.getFullYear();
 
-const getWeather = async (baseURL_weath, place, API_key, newDate) => {
-    const input = document.getElementById('zip').value;
-    const res = await fetch(baseURL_weath+'city='+input+'&key='+API_key)
+const getWeather = async (baseURL_weath, place, API_key) => {
+    const res = await fetch(baseURL_weath+'city='+place+'&key='+API_key)
 	.then(res=>res.json())
-    .then(function(response) {
-        postData('add', {temp, description, input, newDate});
-		console.log(temp, description);
+    .then(function(res) {
+        console.log(res); // RETURNS DATA HERE
+        const data = {temp: res.data["0"].app_temp, description: res.data["0"].weather.description, date: res.data["0"].ob_time};
+        console.log(data)
+        postData('/add', data); // TRY TO PASS res.data[0].temp TO /add route.
     })
     .then(async function() {
         await updateWeather();
     })
-
 }
-const postData = async (url = '', data = {}) => {
+const postData = async(url = '', data) => {
+    console.log(data);
 	const response = await fetch(url, {
 		method: 'POST',
 		credentials: 'same-origin',
@@ -28,8 +29,7 @@ const postData = async (url = '', data = {}) => {
 		body: JSON.stringify({
 			temp: data.temp,
             description: data.description,
-            date:data.date,
-            place:data.place
+            date: data.date
 		}),
 
 	});
@@ -42,14 +42,13 @@ const postData = async (url = '', data = {}) => {
 };
 
 const updateWeather = async() => {
-	const request = await fetch('all')
+	const request = await fetch('/all')
 	try{
         const response = await request.json()
-        document.getElementById('temp').innerHTML = response.app_temp;
-        document.getElementById('description').innerHTML = response.description;
-        document.getElementById('date').innerHTML = response.date;
-        document.getElementById('place').innerHTML = response.city_name;
-        console.log(response)
+        document.getElementById('temp').innerHTML = response.weatherData.temp;
+        document.getElementById('description').innerHTML = response.weatherData.description;
+        document.getElementById('date').innerHTML = response.weatherData.date;
+        
 
 	}catch(error){
 		console.log("error",error);

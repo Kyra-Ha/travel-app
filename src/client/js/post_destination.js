@@ -1,14 +1,15 @@
 /* Function to GET geo_names Web API Data*/
 
 const getDest = async (baseURL_geo, place, userName) => {
-    const input = document.getElementById('zip').value;
 
-    const res = await fetch(baseURL_geo+input+'&maxRows=10&username='+userName)
+    const res = await fetch(baseURL_geo+place+'&maxRows=10&username='+userName)
 	.then(res=>res.json())
-    .then(function(response) {
-        const dest = document.getElementById('place').value
-        postData('add', dest);
-			console.log(dest);
+    .then(function(res) {
+        const lat = res.postalCodes[0].lat;
+        const long = res.postalCodes[0].lng;
+        console.log(lat, long)
+        const data = {place: res.postalCodes[0].placeName}
+        postData('add', data);
     })
     .then(async function() {
         await updateDestination();
@@ -50,11 +51,9 @@ const updateDestination = async() => {
 	const request = await fetch('all')
 	try{
 		const response = await request.json()
-        const place = response.code;
-        console.log(place)
-
+        document.getElementById('place').innerHTML = response.placeEntry.place;
 	}catch(error){
-		console.log("error",error);
+		console.log("error", error);
 	}
 };
 export {getDest}
