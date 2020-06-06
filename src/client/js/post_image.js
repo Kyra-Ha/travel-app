@@ -1,10 +1,9 @@
 
 const getImage = async (baseURL_pic, place, key) => {
-    const res = await fetch(baseURL_pic+'?key='+key+'&q'+place+'&image_type=photo')
+    const res = await fetch(baseURL_pic+'?key='+key+'&q='+place+'&image_type=photo')
     .then(res=>res.json())
     .then(function(res) {
-        console.log(res);
-        const data = {image: res.hits[0]};
+        const data = {image: res.hits[0].pageURL};
         postData('/add', data);
     })
     .then(async function() {
@@ -22,7 +21,7 @@ const postData = async(url = '', data) => {
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({
-			img: data.image
+			image: data.image
 		}),
 
 	});
@@ -38,8 +37,8 @@ const updatePic = async() => {
 	const request = await fetch('/all')
 	try{
         const response = await request.json()
-        document.getElementById('image').innerHTML = response.picData.image;
-
+        document.getElementById('image').setAttribute('src', response.picData.image);
+        console.log(response)
 	}catch(error){
 		console.log("error",error);
 	}
