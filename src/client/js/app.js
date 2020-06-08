@@ -1,6 +1,7 @@
 import { getWeather } from "./get_weather";
 import { getDest } from "./post_destination";
 import { getImage } from "./post_image.js";
+import "../styles/style.scss";
 
 //geonames API 
 const userName = 'kyraha'; 
@@ -17,9 +18,7 @@ let d = new Date();
 let months = ["January", "February", "March", "April", "May", "June", "July",
 "August", "September", "October", "November", "December"];
 let newDate = months[d.getMonth()]+','+ d.getDate()+','+ d.getFullYear();
-//input date
-const start_date = document.getElementById('start_date').value;
-const departure = new Date(start_date).getTime();
+
 
 //Get countdown data
 const date_diff_indays = function(today, depart) {
@@ -34,8 +33,11 @@ const date_diff_indays = function(today, depart) {
 async function performAction(e){
 	e.preventDefault();
 	console.log("clicked");
-	//test if input date registered
+	//input date
+	const start_date = document.getElementById('start_date').value;
+	const departure = new Date(start_date).getTime();
 	console.log(departure);
+	document.getElementById('countdown').innerHTML = Math.ceil(((departure-d.getTime())/(1000 * 60 * 60 * 24)));
 	const content = document.getElementById('zip').value;
 	await getDest(baseURL_geo, content, userName); 
 	await getWeather(baseURL_weath, content, API_key_weather);

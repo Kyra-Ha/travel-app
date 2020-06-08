@@ -21,7 +21,7 @@ body{
 }
 
 .holder{
-    display:flex-start | flex-end;
+    display:flex;
     padding: 20px;
 }
 
@@ -37,7 +37,7 @@ body{
     grid-area:main;
 }
 
-#entryHolder{
+/* #entryHolder{
     
 }
 
@@ -51,7 +51,7 @@ body{
 
 #content{
 
-}
+} */
 
 .headline {
     grid-area: hd;
