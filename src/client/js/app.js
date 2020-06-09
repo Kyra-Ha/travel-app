@@ -33,15 +33,16 @@ const date_diff_indays = function(today, depart) {
 async function performAction(e){
 	e.preventDefault();
 	console.log("clicked");
-	//input date
+	//input countdown
 	const start_date = document.getElementById('start_date').value;
 	const departure = new Date(start_date).getTime();
 	console.log(departure);
 	document.getElementById('countdown').innerHTML = Math.ceil(((departure-d.getTime())/(1000 * 60 * 60 * 24)));
 	const content = document.getElementById('zip').value;
+	await getImage(baseURL_pic, content, API_key_pic);
 	await getDest(baseURL_geo, content, userName); 
 	await getWeather(baseURL_weath, content, API_key_weather);
-	await getImage(baseURL_pic, content, API_key_pic);
+	
 };
 
 export {performAction}
