@@ -7,7 +7,7 @@ const dest = {
   
   export default function getDest(x) {
     return new Promise((resolve, reject) => {
-      const userID = parseInt(x.substr('/users/'.length), 10);
+      const userID = parseInt(x.substr('/add/'.length), 10);
       process.nextTick(() =>
         dest[userID]
           ? resolve(dest[userID])

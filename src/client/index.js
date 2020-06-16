@@ -25,7 +25,7 @@ function saveNotes(){
     notes.style.display = "none";
     saved.style.display = "block";
     btn.style.display="block";
-    text = text.replace('\n', '<br>');
+    text = text.replace(/\r?\n/g, '<br />');
 }
 export{performAction, showCard, addNotes, saveNotes}
 

@@ -19,7 +19,7 @@ body{
     "ct"
     "main";
     height:100vh;
-    background: linear-gradient(#33acdd,#ffffff);
+    background: linear-gradient(#33acdd 20%,#ffffff);
     color: #444;
     justify-content: center;
     grid-gap: 1em;
@@ -44,7 +44,9 @@ body{
     grid-area: ct;
     font-size: 30px;
 }
-
+#notes{
+    display:block;
+}
 img{
     width: 100%;
     height: 300px;
@@ -53,10 +55,10 @@ img{
     grid-area: hd;
     text-align: center;
     font-size:30px;
-    background-image: url("../views/clouds.png");
+    background-image: url("../views/clouds.png") ;
     background-repeat: repeat-x;
     background-size: 300px;
-    background-position: right;
+   
 
 }
 .title{
@@ -76,6 +78,7 @@ input{
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
     border: none;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 .card{
     background: rgba(59, 74, 107, .4);
@@ -86,6 +89,7 @@ input{
     margin-bottom: 10px;
     text-align: left;
     overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 #notes{
     text-align: center;
@@ -106,7 +110,7 @@ button{
     padding:10px;
 }
 .card-body>button{
-    text-align:center;
+    text-align:right;
 }
 
 h1{
@@ -127,19 +131,19 @@ button:focus {
 }
 /* Style for Placeholder Text*/
 ::placeholder { /* Firefox, Chrome, Opera */ 
-    color: #f0d43a; 
+
     font-family: 'Oswald', sans-serif;
 
 } 
   
 :-ms-input-placeholder { /* Internet Explorer 10-11 */ 
-    color: #f0d43a; 
+ 
     font-family: 'Oswald', sans-serif;
 
 } 
   
 ::-ms-input-placeholder { /* Microsoft Edge */ 
-    color: #f0d43a; 
+   
     font-family: 'Oswald', sans-serif;
 
 } 
@@ -155,7 +159,7 @@ button:focus {
         "btn main"
         "btn main";
         height:100vh;
-        background: linear-gradient(#33acdd,#ffffff);
+        background: linear-gradient(#01aef0,#ffffff);
         color: #444;
         justify-content: center;
         grid-gap: 1em;
@@ -187,6 +191,7 @@ button:focus {
     }
     .headline {
         grid-area: hd;
+        background-position-y: top;
     }
 }
 
