@@ -39,8 +39,7 @@ const updateWeather = async() => {
 	const request = await fetch('/all')
 	try{
         const response = await request.json()
-        document.getElementById('temp').innerHTML = "Current Weather: \n"+ response.weatherData.temp+"C";
-        document.getElementById('description').innerHTML = response.weatherData.description;
+        document.getElementById('temp').innerHTML = "Current Weather: \n"+ response.weatherData.temp+"\n C and \n"+response.weatherData.description;
         
 
 	}catch(error){

@@ -6,6 +6,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 module.exports = {
     entry: './src/client/index.js',
+    output: {
+        libraryTarget: 'var',
+        library: 'client'
+    },
     mode: 'production',
     module: {
         rules: [
@@ -15,9 +19,23 @@ module.exports = {
                 loader: "babel-loader"
             },
             {
-                test: /\.scss$/,
-                sideEffects: true,
-                use: [ MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader' ]
+                test: /\.(scss)$/,
+                use: [{
+                loader: MiniCssExtractPlugin.loader, // inject CSS to page
+                }, {
+                loader: 'css-loader', // translates CSS into CommonJS modules
+                }, {
+                loader: 'postcss-loader', // Run postcss actions
+                options: {
+                    plugins: function () { // postcss plugins, can be exported to postcss.config.js
+                    return [
+                        require('autoprefixer')
+                    ];
+                    }
+                }
+                }, {
+                loader: 'sass-loader' // compiles Sass to CSS
+            }]
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
@@ -40,7 +58,7 @@ module.exports = {
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
         }),
-        new MiniCssExtractPlugin({ filename: "[name].scss" })
+        new MiniCssExtractPlugin({ filename: "[name].css" })
     ]
 }
 

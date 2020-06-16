@@ -1,19 +1,26 @@
+@import "~bootstrap/scss/bootstrap";
+
 body{
     background: #fffff8;
+    
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    text-align: center;
 }
 
 #app{
     display: grid;
-    grid-auto-rows: minmax(150px, auto);
-    grid-auto-columns: 1fr 1fr;
+    grid-auto-rows: .1fr .05fr .05fr .05fr .1fr .50fr;
+    grid-auto-columns: 1fr;
     grid-template-areas: 
-    "hd hd"
-    "zip main"
-    "feel main";
+    "hd"
+    "zip"
+    "feel"
+    "btn"
+    "ct"
+    "main";
     height:100vh;
-    background: #f23557;
-    color: #f0d43a;
+    background: linear-gradient(#33acdd,#ffffff);
+    color: #444;
     justify-content: center;
     grid-gap: 1em;
     font-size: 20px;
@@ -23,80 +30,91 @@ body{
 .holder{
     display:flex;
     padding: 20px;
-}
+    text-align: center;
 
+}
 .zip{
     grid-area: zip;
 }
 .feel{
     grid-area: feel;
 }
-.entry{
-    background: rgba(59, 74, 107, .4);
-    margin:20px;
-    grid-area:main;
+#countdown{
+    text-align:center;
+    grid-area: ct;
+    font-size: 30px;
 }
 
-/* #entryHolder{
-    
+img{
+    width: 100%;
+    height: 300px;
 }
-
-#date{
-
-}
-
-#temp{
-
-}
-
-#content{
-
-} */
-
 .headline {
     grid-area: hd;
     text-align: center;
-    font-size:100px;
+    font-size:30px;
+    background-image: url("../views/clouds.png");
+    background-repeat: repeat-x;
+    background-size: 300px;
+    background-position: right;
+
 }
 .title{
   text-align:center;
-
 }
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
-label{
-    display:block;
-    font-size: 27px;
+input, label{
+    font-size: 25px;
+    margin:5px;
 }
 
 input{
     display:block;
     height: 60px;
     width: 320px;
-    background:#22b2da;
-    color: #f0d43a;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
     border: none;
 }
-
+.card{
+    background: rgba(59, 74, 107, .4);
+    margin:20px;
+    grid-area: main;
+    width: 500px;
+    margin: auto;
+    margin-bottom: 10px;
+    text-align: left;
+    overflow: hidden;
+}
+#notes{
+    text-align: center;
+}
 button{
-    width: 400px;
-    height: 100px;
+    width: 100px;
+    height: 50px;
     background: #3b4a6b;
     color: #f0d43a;
     font-size: 26px;
     font-family: 'Oswald', sans-serif;
     border: none;
     box-shadow: 2px 4px 5px #444;
+    grid-area:btn;
+    text-align: center;
+    display:block;
+    margin:auto;
+    padding:10px;
 }
+.card-body>button{
+    text-align:center;
+}
+
 h1{
     font-size: 36px;
 }
 
 textarea{
-    background:#22b2da;
-    color: #f0d43a;
+
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
 }
@@ -125,3 +143,50 @@ button:focus {
     font-family: 'Oswald', sans-serif;
 
 } 
+@media (min-width: 1007px){
+    #app{
+        display: grid;
+        grid-auto-rows: minmax(10px, 200px);
+        grid-template-columns: 50% 50%;
+        grid-template-areas: 
+        "hd hd"
+        "zip ct"
+        "feel main"
+        "btn main"
+        "btn main";
+        height:100vh;
+        background: linear-gradient(#33acdd,#ffffff);
+        color: #444;
+        justify-content: center;
+        grid-gap: 1em;
+        font-size: 20px;
+        font-family: 'Oswald', sans-serif;
+        overflow-y: hidden;
+        overflow: auto;
+    }
+    .card{
+        grid-area: main;
+        margin-right: 20px;
+        margin-bottom:20px;
+        margin:auto;
+        top:0;
+    }
+    .zip{
+        grid-area: zip;
+    }
+    .feel{
+        grid-area: feel;
+    }
+    .button{
+        grid-area:btn;
+        height: 50px;
+    }
+    #countdown{
+        grid-area: ct;
+        margin: 20px;
+    }
+    .headline {
+        grid-area: hd;
+    }
+}
+

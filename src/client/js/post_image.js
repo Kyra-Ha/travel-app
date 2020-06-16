@@ -3,7 +3,7 @@ const getImage = async (baseURL_pic, place, key) => {
     const res = await fetch(baseURL_pic+'?key='+key+'&q='+place+'&image_type=photo')
     .then(res=>res.json())
     .then(function(res) {
-        const data = {image: res.hits[0].webformatURL};
+        const data = {image: res.hits[1].webformatURL};
         console.log(data);
         postData('/add', data);
     })

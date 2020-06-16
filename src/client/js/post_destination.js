@@ -51,7 +51,7 @@ const updateDestination = async() => {
 	const request = await fetch('all')
 	try{
 		const response = await request.json()
-        document.getElementById('place').innerHTML = response.placeEntry.place;
+        document.getElementById('place').innerHTML = "<u> My trip to \n" + response.placeEntry.place+"</u>";
 	}catch(error){
 		console.log("error", error);
 	}
