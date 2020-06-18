@@ -36,7 +36,7 @@ module.exports = {
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
         }),
-        new MiniCssExtractPlugin({ filename: "[name].scss" })
+        new MiniCssExtractPlugin({ filename: "[name].css" })
         
     ]
 }

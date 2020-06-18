@@ -3,16 +3,6 @@ import { getDest } from "./post_destination";
 import { getImage } from "./post_image.js";
 
 
-//geonames API 
-const userName = process.env.userName; 
-const baseURL_geo = 'http://api.geonames.org/postalCodeSearchJSON?placename=';
-//weatherbit.io API
-const baseURL_weath = 'https://api.weatherbit.io/v2.0/current?';
-const API_key_weather = process.env.API_key_weather;
-//pixabay API
-const API_key_pic = process.env.API_key_pic; 
-const baseURL_pic = 'https://pixabay.com/api/';
-
 // Create a new date instance dynamically with JS
 let d = new Date();
 
@@ -30,9 +20,13 @@ async function performAction(e){
 	document.getElementById('trip_length').innerHTML = "Length of Trip: \n"+Math.ceil(((endDate-departure)/(1000 * 60 * 60 * 24)))+"\n days";
 	//post API data
 	const content = document.getElementById('zip').value;
-	await getImage(baseURL_pic, content, API_key_pic);
-	await getDest(baseURL_geo, content, userName); 
-	await getWeather(baseURL_weath, content, API_key_weather);
+
+	// TODO: send POST request to the backend url and pass the relevant data
+	// 		 and also takes a response with data related to images and weather
+
+	await getImage(baseURL_pic, content, app_key_pic);
+	await getDest(baseURL_geo, content, app_id); 
+	await getWeather(baseURL_weath, content, app_key_weather);
 	
 };
 

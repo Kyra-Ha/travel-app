@@ -12,6 +12,9 @@ module.exports = {
         library: 'client'
     },
     mode: 'production',
+    node: {
+        fs: "empty"
+     },
     module: {
         rules: [
             {
