@@ -1,12 +1,11 @@
-// Setup empty JS object to act as endpoint for all routes
-projectData = {};
+
 const fetch=require('node-fetch');
 
 const dotenv = require('dotenv');
 dotenv.config();
 //geonames API 
 const baseURL_geo = 'http://api.geonames.org/postalCodeSearchJSON?placename=';
-const app_id= process.env.userName;
+const app_id= process.env.app_id;
 //weatherbit.io API
 const baseURL_weath = 'https://api.weatherbit.io/v2.0/current?';
 const app_key_weather=process.env.API_key_weather;
@@ -51,67 +50,76 @@ app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
 })
 
-// Callback function to complete GET '/all'
-app.get('/all', sendData)
-function sendData(req, res){
-	res.send(projectData);
+
+//Post Image
+
+const getImage = async (baseURL_pic, place) => {
+	const response = await fetch(baseURL_pic+'?key='+app_key_pic+'&q='+place+'&image_type=photo')
+	.then(res=>res.json())
+	.then(function(res) {
+		const data = res.hits[1].webformatURL;
+		console.log(data);
+		return data;
+	})
+	.catch(err => err);
+	return response;
 };
-// TODO: write a route that app.js can send data to
-// 		 and make sure we query the weather api.
-// 		 and then returns the weather and an image.
-app.get('/add', (req, res)=>{
-	const getWeather = async (baseURL_weath, place, API_key) => {
-		const res = await fetch(baseURL_weath+'city='+place+'&key='+API_key);
-		try {
-			const data = await response.json();
-			// console.log(data);
-			return data;
-		  } catch (error) {
-			console.log('Error here: ', error);
-		  }
-		};
-	const getImage = async (baseURL_pic, place, key) => {
-		const res = await fetch(baseURL_pic+'?key='+key+'&q='+place+'&image_type=photo');
-		try {
-			const data = await response.json();
-			return data;
-			} catch (error) {
-			console.log('Error here: ', error);
-			}
-		};
-	const getDest = async (baseURL_geo, place, userName) => {
-		const res = await fetch(baseURL_geo+place+'&maxRows=10&username='+userName);
-		try {
-			const data = await response.json();
-			return data;
-			} catch (error) {
-			console.log('Error here: ', error);
-			}
-		};
+app.post('/addImage', async (req, res) => {
+	const placeName = req.body.place;
+	const img = await getImage(baseURL_pic, placeName);
+	res.send({
+		image: img
+	});
+	console.log(placeName);
 })
-// Post Route
 
-app.post('/add', addData);
+//Post Destination
+const getDest = async (baseURL_geo, place) => {
+	const response = await fetch(baseURL_geo+place+'&maxRows=10&username='+app_id)
+	.then(res=>res.json())
+	.then(function(res) {
+		const lat = res.postalCodes[0].lat;
+		const long = res.postalCodes[0].lng;
+		console.log(lat, long);
+		const data = {place: res.postalCodes[0].placeName};
+		return data
+	})
+	.catch(err=>err);
+	return response;
+}
 
-function addData(req, res){
-	console.log(req.body);
-	const placeEntry = {
-		place : req.body.place,
-	};
-	const weatherData = {
-		temp: req.body.temp,
-		description: req.body.description, 
-		date: req.body.date
-	};
-	const picData = {
-		image: req.body.image
-	};
-	await getDest();
-	await getImage();
-	await getWeather();
+app.post('/addDest', async(req,res)=> {
+	const destination = req.body.place;
+	const dest = await getDest(baseURL_geo, destination);
+	res.send({
+		dest: dest
+	});
+	console.log(destination)
+})
 
-	projectData = {placeEntry,weatherData,picData}
-	res.send(projectData);
+//Post Weather
+
+const getWeather = async (baseURL_weath, place) => {
+	const response = await fetch(baseURL_weath+'city='+place+'&key='+app_key_weather)
+	.then(res=>res.json())
+	.then(function(res) {
+		const data = {temp: res.data["0"].app_temp, description: res.data["0"].weather.description};
+		console.log(data);
+		return data;
+	})
+	.catch(err=>err);
+	return response;
 };
 
+app.post('/addWeath', async(req, res)=>{
+	const weather = req.body.place;
+	const weatherData = await getWeather(baseURL_weath, weather);
+	console.log(weatherData);
+	res.send({
+		temp: weatherData.temp,
+		description: weatherData.description
+	});
+	
+})
 
+module.exports = app;

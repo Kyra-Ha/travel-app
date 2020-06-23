@@ -154,10 +154,10 @@ button:focus {
         grid-template-columns: 50% 50%;
         grid-template-areas: 
         "hd hd"
-        "zip ct"
+        "zip main"
         "feel main"
         "btn main"
-        "btn main";
+        "ct ct";
         height:100vh;
         background: linear-gradient(#01aef0,#ffffff);
         color: #444;
