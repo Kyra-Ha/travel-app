@@ -64,7 +64,7 @@ const getImage = async (baseURL_pic, place) => {
 	.catch(err => err);
 	return response;
 };
-app.post('http://localhost:8000/addImage', async (req, res) => {
+app.post('/addImage', async (req, res) => {
 	const placeName = req.body.place;
 	const img = await getImage(baseURL_pic, placeName);
 	res.send({
@@ -88,7 +88,7 @@ const getDest = async (baseURL_geo, place) => {
 	return response;
 }
 
-app.post('http://localhost:8000/addDest', async(req,res)=> {
+app.post('/addDest', async(req,res)=> {
 	const destination = req.body.place;
 	const dest = await getDest(baseURL_geo, destination);
 	res.send({
@@ -111,7 +111,7 @@ const getWeather = async (baseURL_weath, place) => {
 	return response;
 };
 
-app.post('http://localhost:8000/addWeath', async(req, res)=>{
+app.post('/addWeath', async(req, res)=>{
 	const weather = req.body.place;
 	const weatherData = await getWeather(baseURL_weath, weather);
 	console.log(weatherData);
