@@ -1,5 +1,5 @@
 const postDataWeather = async(content) => {
-	fetch('/addWeath', {
+	fetch('http://localhost:8000/addWeath', {
 		method: 'POST',
 		credentials: 'same-origin',
 		headers: {

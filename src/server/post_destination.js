@@ -1,5 +1,5 @@
 const postDataDest = async(content) => {
-	fetch('/addDest', {
+	fetch('http://localhost:8000/addDest', {
 		method: 'POST',
 		credentials: 'same-origin',
 		headers: {

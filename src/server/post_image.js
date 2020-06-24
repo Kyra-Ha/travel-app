@@ -1,5 +1,5 @@
 const postDataImg = async(content) => {
-	fetch('/addImage', {
+	fetch('http://localhost:8000/addImage', {
 		method: 'POST',
 		credentials: 'same-origin',
 		headers: {
