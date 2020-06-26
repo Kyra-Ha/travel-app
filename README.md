@@ -7,7 +7,7 @@ Basic travel planner that gives returns an image of destination, current weather
 To run the project, node.js is required.
   - installation instructions: https://nodejs.org/en/download/
   
-After installing node.js, install npm (node package manager) by runnnig the script:
+After installing node.js, install npm (node package manager) by running the script:
 > npm i
 
 To start the server, run the command:
@@ -18,5 +18,6 @@ Then go to http://localhost:8000 to view the app!
 ## Demo
 ![Travel App Demo](demo/travelapp.gif)
 
+## Acknowledgements
 
-
+I'd like to thank Udacity and all the mentors that helped me with EVERY question I asked and always pointed me in the right direction.  
