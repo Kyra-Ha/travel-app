@@ -10,6 +10,7 @@ function showCard(){
     const card = document.getElementById('trip');
     card.style.display="block";
 }
+
 const notes = document.getElementById('to-do');
 const btn = document.getElementById("notes");
 
