@@ -1,6 +1,7 @@
-import {performAction} from './js/app.js'
+import {performAction} from './js/app.js';
 import './styles/style.scss';
 import 'regenerator-runtime/runtime';
+import {animat} from './views/loading.js';
 
 // Event listener to add function to existing HTML DOM element
 
@@ -26,7 +27,9 @@ function saveNotes(){
     notes.style.display = "none";
     saved.style.display = "block";
     btn.style.display="block";
-    text = text.replace(/\r?\n/g, '<br />');
+    text = text.replace(/\r?\n/g, '<\n>');
 }
-export{performAction, showCard, addNotes, saveNotes}
+
+
+export{performAction, showCard, addNotes, saveNotes, animat}
 

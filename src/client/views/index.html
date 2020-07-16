@@ -21,11 +21,13 @@
         <input class = "form-control" type = date id="end_date" placeholder="MM-DD-YYYY"></input>
       </div>
     <div class="button">
-      <button id="generate" type = "button" class = "btn btn-primary" onclick = "return client.showCard()"> Get Trip! </button>  
+      <button id="generate" type = "button" class = "btn btn-primary" onclick = "client.animat(); client.showCard()" > Get Trip! </button>  
     </div>
     <div id = "countdown"> 
     </div> 
     <section id = "container">
+      <div id="loading" style = "display:none">
+      </div>
       <div class ="card" id = "trip" style= "display:none">
         <div class = "title"></div>
         <img id = "image" src = "empty.jpg" class="rounded mx-auto d-block" class = "card-img-top" alt ="image of destination"></img>
