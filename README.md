@@ -16,7 +16,7 @@ To start the server, run the command:
 Then go to http://localhost:8000 to view the app!
 
 ## Demo
-![Travel App Demo](demo/travelapp.gif)
+![Travel App Demo](demo/travelapp.gif.mp4)
 
 ## Acknowledgements
 
